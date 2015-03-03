@@ -129,7 +129,11 @@
     _placeholderLabel.backgroundColor = [UIColor clearColor];
     _placeholderLabel.textColor = self.placeholderColor;
     _placeholderLabel.text = self.placeholder;
-    _placeholderLabel.textAlignment = [_placeholderLabel.text naturalTextAligment];
+    if([_placeholderLabel.text respondsToSelector:@selector(attributedText)]) {
+        _placeholderLabel.textAlignment = [_placeholderLabel.text naturalTextAligment];
+    } else { 
+    	_placeholderLabel.textAlignment = NSTextAlignmentLeft;
+    }
     [_placeholderLabel sizeToFit];
     
     CGRect rect = [self _placeholderRectForBounds:self.bounds];
